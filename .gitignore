@@ -38,6 +38,10 @@ yarn-error.log*
 
 # local database + uploads
 /data/db.json
+/data/db.json.imported
+/data/homework.db
+/data/homework.db-shm
+/data/homework.db-wal
 /public/uploads/
 
 # typescript
