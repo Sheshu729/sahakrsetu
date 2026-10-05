@@ -124,7 +124,7 @@ export default function OwnerDashboard() {
       )}
 
       {jobs.length === 0 ? (
-        <div className="text-center py-20 rounded-2xl" style={{ backgroundColor: "rgba(255,255,255,0.35)", backdropFilter: "blur(20px)", border: "1px solid rgba(255,255,255,0.5)" }}>
+        <div className="text-center py-20 rounded-2xl" style={{ backgroundColor: "#ffffff", border: "1px solid rgba(15,23,42,0.08)", boxShadow: "0 1px 2px rgba(15,23,42,0.04)" }}>
           <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ backgroundColor: "#1a1a2e" }}>
             <Inbox className="w-8 h-8" style={{ color: "#F0B45B" }} />
           </div>
@@ -141,13 +141,13 @@ export default function OwnerDashboard() {
       ) : (
         <div className="space-y-4">
           {jobs.map((job) => (
-            <Link key={job.id} href={`/owner/${job.id}`} className="block p-6 rounded-xl transition-colors" style={{ backgroundColor: "rgba(255,255,255,0.35)", backdropFilter: "blur(20px)", border: "1px solid rgba(255,255,255,0.5)" }}>
+            <Link key={job.id} href={`/owner/${job.id}`} className="block p-6 rounded-xl transition-colors" style={{ backgroundColor: "#ffffff", border: "1px solid rgba(15,23,42,0.08)", boxShadow: "0 1px 2px rgba(15,23,42,0.04)" }}>
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
                     <h3 className="text-lg font-semibold" style={{ color: "#1a1a2e" }}>{job.title}</h3>
                     <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${STATUS_COLORS[job.status]}`}>{job.status}</span>
-                    <span className="px-2.5 py-0.5 rounded-full text-xs font-medium" style={{ backgroundColor: "rgba(255,255,255,0.35)", color: "#5a4a20", border: "1px solid rgba(255,255,255,0.5)" }}>{JOB_CATEGORIES.find((c) => c.value === job.category)?.label}</span>
+                    <span className="px-2.5 py-0.5 rounded-full text-xs font-medium" style={{ backgroundColor: "rgba(15,23,42,0.04)", color: "#5a4a20", border: "1px solid rgba(15,23,42,0.1)" }}>{JOB_CATEGORIES.find((c) => c.value === job.category)?.label}</span>
                   </div>
                   <p className="line-clamp-2 mb-3" style={{ color: "#5a4a20" }}>{job.description}</p>
                   <div className="flex items-center gap-4 text-sm" style={{ color: "#7a6a30" }}>
@@ -164,12 +164,12 @@ export default function OwnerDashboard() {
                 </div>
               </div>
               {(job.status === "assigned") && (
-                <div className="flex gap-2 mt-4 pt-4" style={{ borderTop: "1px solid rgba(255,255,255,0.5)" }} onClick={(e) => e.preventDefault()}>
+                <div className="flex gap-2 mt-4 pt-4" style={{ borderTop: "1px solid rgba(15,23,42,0.08)" }} onClick={(e) => e.preventDefault()}>
                   <button
                     onClick={() => handleStatusUpdate(job.id, "completed")}
                     disabled={actionLoading === job.id}
                     className="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
-                    style={{ border: "1px solid #1e8e3e", color: "#69db7c" }}
+                    style={{ border: "1px solid #1e8e3e", color: "#1e8e3e" }}
                   >
                     Mark as Complete
                   </button>
@@ -177,19 +177,19 @@ export default function OwnerDashboard() {
                     onClick={() => handleStatusUpdate(job.id, "cancelled")}
                     disabled={actionLoading === job.id}
                     className="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
-                    style={{ border: "1px solid #d93025", color: "#ff6b6b" }}
+                    style={{ border: "1px solid #d93025", color: "#d93025" }}
                   >
                     Cancel
                   </button>
                 </div>
               )}
               {job.status === "open" && (
-                <div className="flex gap-2 mt-4 pt-4" style={{ borderTop: "1px solid rgba(255,255,255,0.5)" }} onClick={(e) => e.preventDefault()}>
+                <div className="flex gap-2 mt-4 pt-4" style={{ borderTop: "1px solid rgba(15,23,42,0.08)" }} onClick={(e) => e.preventDefault()}>
                   <button
                     onClick={() => handleStatusUpdate(job.id, "cancelled")}
                     disabled={actionLoading === job.id}
                     className="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
-                    style={{ border: "1px solid #d93025", color: "#ff6b6b" }}
+                    style={{ border: "1px solid #d93025", color: "#d93025" }}
                   >
                     Cancel
                   </button>

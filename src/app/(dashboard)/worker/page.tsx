@@ -101,9 +101,9 @@ export default function WorkerDashboard() {
             onClick={() => setFilter("all")}
             className="px-4 py-2 rounded-full text-sm font-medium transition-colors"
             style={{
-              backgroundColor: filter === "all" ? "#F0B45B" : "rgba(255,255,255,0.35)",
-              color: filter === "all" ? "#1a1a2e" : "#5a4a20",
-              border: `1px solid ${filter === "all" ? "#F0B45B" : "rgba(255,255,255,0.5)"}`,
+backgroundColor: filter === "all" ? "#1a1a2e" : "#ffffff",
+                color: filter === "all" ? "#F0B45B" : "#1a1a2e",
+                border: `1px solid ${filter === "all" ? "#1a1a2e" : "rgba(15,23,42,0.1)"}`,
             }}
           >
             All
@@ -114,9 +114,9 @@ export default function WorkerDashboard() {
               onClick={() => setFilter(cat.value)}
               className="px-4 py-2 rounded-full text-sm font-medium transition-colors"
                 style={{
-                  backgroundColor: filter === cat.value ? "#F0B45B" : "rgba(255,255,255,0.35)",
-                  color: filter === cat.value ? "#1a1a2e" : "#5a4a20",
-                  border: `1px solid ${filter === cat.value ? "#F0B45B" : "rgba(255,255,255,0.5)"}`,
+                  backgroundColor: filter === cat.value ? "#F0B45B" : "#ffffff",
+                  color: filter === cat.value ? "#1a1a2e" : "#1a1a2e",
+                  border: `1px solid ${filter === cat.value ? "#F0B45B" : "rgba(15,23,42,0.1)"}`,
                 }}
             >
               {cat.label}
@@ -125,7 +125,7 @@ export default function WorkerDashboard() {
         </div>
 
         {filteredJobs.length === 0 ? (
-          <div className="text-center py-20 rounded-xl" style={{ backgroundColor: "rgba(255,255,255,0.35)", backdropFilter: "blur(20px)", border: "1px solid rgba(255,255,255,0.5)" }}>
+          <div className="text-center py-20 rounded-xl" style={{ backgroundColor: "#ffffff", border: "1px solid rgba(15,23,42,0.08)", boxShadow: "0 1px 2px rgba(15,23,42,0.04)" }}>
             <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ backgroundColor: "#1a1a2e" }}>
               <Briefcase className="w-8 h-8" style={{ color: "#F0B45B" }} />
             </div>
@@ -144,16 +144,17 @@ export default function WorkerDashboard() {
                   href={`/worker/${job.id}`}
                   className="block p-6 rounded-xl transition-colors"
                   style={{
-                    backgroundColor: "rgba(255,255,255,0.35)",
-                    border: hasApplied ? "1px solid rgba(255,255,255,0.5)" : "1px solid rgba(255,255,255,0.5)",
+                    backgroundColor: "#ffffff",
+                    border: "1px solid rgba(15,23,42,0.08)",
+                    boxShadow: "0 1px 2px rgba(15,23,42,0.04)",
                   }}
                 >
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="px-2.5 py-0.5 rounded-full text-xs font-medium" style={{ backgroundColor: "rgba(255,255,255,0.35)", color: "#5a4a20", border: "1px solid rgba(255,255,255,0.5)" }}>
+                    <span className="px-2.5 py-0.5 rounded-full text-xs font-medium" style={{ backgroundColor: "rgba(15,23,42,0.04)", color: "#5a4a20", border: "1px solid rgba(15,23,42,0.1)" }}>
                       {JOB_CATEGORIES.find((c) => c.value === job.category)?.label}
                     </span>
                     {hasApplied && (
-                      <span className="px-2.5 py-0.5 rounded-full text-xs font-medium" style={{ backgroundColor: "rgba(240,180,91,0.2)", color: "#F0B45B", border: "1px solid rgba(240,180,91,0.3)" }}>
+                      <span className="px-2.5 py-0.5 rounded-full text-xs font-medium" style={{ backgroundColor: "rgba(240,180,91,0.12)", color: "#9a6b1f", border: "1px solid rgba(240,180,91,0.35)" }}>
                         Applied
                       </span>
                     )}

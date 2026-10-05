@@ -50,7 +50,7 @@ export default function MessagesList({ basePath, emptyHint }: { basePath: string
         {conversations.length === 0 ? (
           <div
             className="flex flex-col items-center justify-center py-16 rounded-xl"
-            style={{ backgroundColor: "rgba(255,255,255,0.35)", backdropFilter: "blur(20px)", border: "1px solid rgba(255,255,255,0.5)" }}
+            style={{ backgroundColor: "#ffffff", border: "1px solid rgba(15,23,42,0.08)", boxShadow: "0 1px 2px rgba(15,23,42,0.04)" }}
           >
             <MessageSquare size={48} style={{ color: "#7a6a30" }} className="mb-4" />
             <h2 className="text-lg font-semibold mb-2" style={{ color: "#1a1a2e" }}>No conversations yet</h2>
@@ -63,7 +63,7 @@ export default function MessagesList({ basePath, emptyHint }: { basePath: string
                 key={conv.id}
                 href={`${basePath}/messages/${conv.id}`}
                 className="block rounded-xl p-4 transition-colors"
-                style={{ backgroundColor: "rgba(255,255,255,0.35)", backdropFilter: "blur(20px)", border: "1px solid rgba(255,255,255,0.5)" }}
+                style={{ backgroundColor: "#ffffff", border: "1px solid rgba(15,23,42,0.08)", boxShadow: "0 1px 2px rgba(15,23,42,0.04)" }}
               >
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">

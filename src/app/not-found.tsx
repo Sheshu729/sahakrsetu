@@ -3,7 +3,7 @@ import { SearchX } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div style={{ background: "linear-gradient(180deg, #c8850a 0%, #d4940a 20%, #F0B45B 50%, #f5c878 80%, #fae3a0 100%)", minHeight: "100vh" }} className="flex items-center justify-center px-4">
+    <div style={{ background: "linear-gradient(180deg, #f7f8fa 0%, #eef1f5 50%, #e8ecf2 100%)", minHeight: "100vh" }} className="flex items-center justify-center px-4">
       <div className="text-center space-y-6">
         <div className="flex items-center justify-center w-20 h-20 rounded-full mx-auto" style={{ backgroundColor: "#1a1a2e" }}>
           <SearchX className="w-10 h-10" style={{ color: "#F0B45B" }} />

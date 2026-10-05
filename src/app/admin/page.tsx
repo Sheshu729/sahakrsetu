@@ -38,11 +38,11 @@ export default function AdminPage() {
 
   if (authLoading || loading) {
     return (
-      <div style={{ background: "linear-gradient(180deg, #c8850a 0%, #d4940a 20%, #F0B45B 50%, #f5c878 80%, #fae3a0 100%)", minHeight: "100vh" }} className="p-8">
+      <div style={{ background: "linear-gradient(180deg, #f7f8fa 0%, #eef1f5 50%, #e8ecf2 100%)", minHeight: "100vh" }} className="p-8">
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-4 gap-4">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="h-28 rounded-xl animate-pulse" style={{ backgroundColor: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }} />
+              <div key={i} className="h-28 rounded-xl animate-pulse" style={{ backgroundColor: "rgba(15,23,42,0.06)", border: "1px solid rgba(15,23,42,0.08)" }} />
             ))}
           </div>
         </div>
@@ -52,7 +52,7 @@ export default function AdminPage() {
 
   if (error) {
     return (
-      <div style={{ background: "linear-gradient(180deg, #c8850a 0%, #d4940a 20%, #F0B45B 50%, #f5c878 80%, #fae3a0 100%)", minHeight: "100vh" }} className="flex items-center justify-center">
+      <div style={{ background: "linear-gradient(180deg, #f7f8fa 0%, #eef1f5 50%, #e8ecf2 100%)", minHeight: "100vh" }} className="flex items-center justify-center">
         <div className="text-center">
           <ShieldAlert className="w-16 h-16 mx-auto mb-4" style={{ color: "#ff6b6b" }} />
           <h1 className="text-2xl font-semibold mb-2" style={{ color: "#1a1a2e" }}>Access Denied</h1>
@@ -70,12 +70,12 @@ export default function AdminPage() {
   ];
 
   return (
-    <div style={{ background: "linear-gradient(180deg, #c8850a 0%, #d4940a 20%, #F0B45B 50%, #f5c878 80%, #fae3a0 100%)", minHeight: "100vh" }}>
+    <div style={{ background: "linear-gradient(180deg, #f7f8fa 0%, #eef1f5 50%, #e8ecf2 100%)", minHeight: "100vh" }}>
       <div className="max-w-4xl mx-auto p-8">
         <h1 className="text-2xl font-semibold mb-6" style={{ color: "#1a1a2e" }}>Admin Dashboard</h1>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {cards.map((card) => (
-            <div key={card.label} className="rounded-xl p-6" style={{ backgroundColor: "rgba(255,255,255,0.35)", backdropFilter: "blur(20px)", border: "1px solid rgba(255,255,255,0.5)" }}>
+            <div key={card.label} className="rounded-xl p-6" style={{ backgroundColor: "#ffffff", border: "1px solid rgba(15,23,42,0.08)", boxShadow: "0 1px 2px rgba(15,23,42,0.04)" }}>
               <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-3" style={{ backgroundColor: `${card.color}22` }}>
                 <card.icon className="w-5 h-5" style={{ color: card.color }} />
               </div>

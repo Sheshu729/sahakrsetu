@@ -262,12 +262,12 @@ export default function PostDetailPage() {
 
       <div className="grid grid-cols-3 gap-6">
         <div className="col-span-2">
-          <div className="rounded-xl p-6 mb-6" style={{ backgroundColor: "rgba(255,255,255,0.35)", backdropFilter: "blur(20px)", border: "1px solid rgba(255,255,255,0.5)" }}>
+          <div className="rounded-xl p-6 mb-6" style={{ backgroundColor: "#ffffff", border: "1px solid rgba(15,23,42,0.08)", boxShadow: "0 1px 2px rgba(15,23,42,0.04)" }}>
             <div className="flex items-center gap-3 mb-4">
               <h1 className="text-2xl font-bold" style={{ color: "#1a1a2e" }}>{job.title}</h1>
               <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${STATUS_COLORS[job.status]}`}>{job.status}</span>
             </div>
-            <span className="inline-block px-2.5 py-0.5 rounded-full text-xs font-medium mb-4" style={{ backgroundColor: "rgba(255,255,255,0.35)", color: "#5a4a20", border: "1px solid rgba(255,255,255,0.5)" }}>
+            <span className="inline-block px-2.5 py-0.5 rounded-full text-xs font-medium mb-4" style={{ backgroundColor: "rgba(15,23,42,0.04)", color: "#5a4a20", border: "1px solid rgba(15,23,42,0.1)" }}>
               {JOB_CATEGORIES.find((c) => c.value === job.category)?.label}
             </span>
             <p className="leading-relaxed mb-6" style={{ color: "#5a4a20" }}>{job.description}</p>
@@ -284,11 +284,11 @@ export default function PostDetailPage() {
               </div>
             )}
 
-            <div className="flex gap-2 mt-6 pt-4" style={{ borderTop: "1px solid rgba(255,255,255,0.5)" }}>
+            <div className="flex gap-2 mt-6 pt-4" style={{ borderTop: "1px solid rgba(15,23,42,0.08)" }}>
               <Link
                 href={`/owner/${job.id}/edit`}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors"
-                style={{ border: "1px solid rgba(240,180,91,0.3)", color: "#F0B45B" }}
+                style={{ border: "1px solid rgba(15,23,42,0.12)", color: "#9a6b1f" }}
               >
                 <Edit className="w-3.5 h-3.5" /> Edit Job
               </Link>
@@ -335,7 +335,7 @@ export default function PostDetailPage() {
         </div>
 
         <div className="col-span-1">
-          <div className="rounded-xl p-6" style={{ backgroundColor: "rgba(255,255,255,0.35)", backdropFilter: "blur(20px)", border: "1px solid rgba(255,255,255,0.5)" }}>
+          <div className="rounded-xl p-6" style={{ backgroundColor: "#ffffff", border: "1px solid rgba(15,23,42,0.08)", boxShadow: "0 1px 2px rgba(15,23,42,0.04)" }}>
             <h2 className="text-lg font-semibold mb-4" style={{ color: "#1a1a2e" }}>Applicants ({applications.length})</h2>
             {applications.length === 0 ? (
               <p className="text-sm text-center py-8" style={{ color: "#7a6a30" }}>No applications yet. Workers will apply soon.</p>
@@ -346,8 +346,8 @@ export default function PostDetailPage() {
                     key={app.id}
                     className="p-4 rounded-xl transition-colors"
                     style={{
-                      border: app.status === "accepted" ? "1px solid rgba(30,142,62,0.5)" : app.status === "rejected" ? "1px solid rgba(217,48,37,0.3)" : "1px solid rgba(255,255,255,0.5)",
-                      backgroundColor: app.status === "accepted" ? "rgba(30,142,62,0.05)" : app.status === "rejected" ? "rgba(217,48,37,0.05)" : "rgba(255,255,255,0.35)",
+                      border: app.status === "accepted" ? "1px solid rgba(30,142,62,0.4)" : app.status === "rejected" ? "1px solid rgba(217,48,37,0.25)" : "1px solid rgba(15,23,42,0.1)",
+                      backgroundColor: app.status === "accepted" ? "rgba(30,142,62,0.05)" : app.status === "rejected" ? "rgba(217,48,37,0.04)" : "rgba(15,23,42,0.03)",
                       opacity: app.status === "rejected" ? 0.5 : 1,
                     }}
                   >
@@ -376,7 +376,7 @@ export default function PostDetailPage() {
                               onClick={() => handleDecision(app.id, "accepted")}
                               disabled={actionLoading === app.id}
                               className="p-1.5 rounded-lg transition-colors disabled:opacity-50"
-                              style={{ backgroundColor: "rgba(30,142,62,0.1)", color: "#69db7c" }}
+                              style={{ backgroundColor: "rgba(30,142,62,0.1)", color: "#1e8e3e" }}
                               title="Accept"
                             >
                               <Check className="w-4 h-4" />
@@ -385,7 +385,7 @@ export default function PostDetailPage() {
                               onClick={() => handleDecision(app.id, "rejected")}
                               disabled={actionLoading === app.id}
                               className="p-1.5 rounded-lg transition-colors disabled:opacity-50"
-                              style={{ backgroundColor: "rgba(217,48,37,0.1)", color: "#ff6b6b" }}
+                              style={{ backgroundColor: "rgba(217,48,37,0.1)", color: "#d93025" }}
                               title="Reject"
                             >
                               <X className="w-4 h-4" />
@@ -395,7 +395,7 @@ export default function PostDetailPage() {
                         <button
                           onClick={() => handleMessageWorker(app.worker_id)}
                           className="p-1.5 rounded-lg transition-colors"
-                          style={{ backgroundColor: "rgba(255,255,255,0.35)", color: "#5a4a20" }}
+                          style={{ backgroundColor: "rgba(15,23,42,0.06)", color: "#1a1a2e" }}
                           title="Message Worker"
                         >
                           <MessageCircle className="w-4 h-4" />
@@ -408,7 +408,7 @@ export default function PostDetailPage() {
             )}
             {acceptedApp && (
               <div className="mt-4 p-4 rounded-xl" style={{ backgroundColor: "rgba(30,142,62,0.1)", border: "1px solid rgba(30,142,62,0.3)" }}>
-                <p className="text-sm font-medium mb-1" style={{ color: "#69db7c" }}>Worker Selected</p>
+                <p className="text-sm font-medium mb-1" style={{ color: "#1e8e3e" }}>Worker Selected</p>
                 <p className="text-sm" style={{ color: "#1a1a2e" }}>{acceptedApp.profiles?.full_name}</p>
                 <p className="text-xs" style={{ color: "#7a6a30" }}>{acceptedApp.profiles?.phone}</p>
               </div>

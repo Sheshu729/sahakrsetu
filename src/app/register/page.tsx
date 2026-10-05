@@ -56,11 +56,11 @@ export default function RegisterPage() {
   return (
     <div
       className="min-h-screen flex items-center justify-center px-4 py-10"
-      style={{ background: "linear-gradient(180deg, #c8850a 0%, #d4940a 20%, #F0B45B 50%, #f5c878 80%, #fae3a0 100%)", fontFamily: "'Google Sans', 'Roboto', system-ui, sans-serif" }}
+      style={{ background: "linear-gradient(180deg, #f7f8fa 0%, #eef1f5 50%, #e8ecf2 100%)", fontFamily: "'Google Sans', 'Roboto', system-ui, sans-serif" }}
     >
       <div
         className="w-full max-w-md p-10 rounded-2xl border"
-        style={{ backgroundColor: "rgba(255,255,255,0.35)", backdropFilter: "blur(20px)", borderColor: "rgba(255,255,255,0.5)" }}
+        style={{ backgroundColor: "#ffffff", borderColor: "rgba(15,23,42,0.08)", boxShadow: "0 4px 24px rgba(15,23,42,0.06)" }}
       >
         <div className="flex flex-col items-center mb-8">
           <div
@@ -96,12 +96,12 @@ export default function RegisterPage() {
             onClick={() => setRole("owner")}
             className="flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all"
             style={{
-              borderColor: role === "owner" ? "#1a1a2e" : "rgba(255,255,255,0.15)",
-              backgroundColor: role === "owner" ? "rgba(255,255,255,0.5)" : "rgba(255,255,255,0.04)",
+              borderColor: role === "owner" ? "#1a1a2e" : "rgba(15,23,42,0.12)",
+              backgroundColor: role === "owner" ? "#1a1a2e" : "#ffffff",
             }}
           >
             <Home className="w-6 h-6" style={{ color: role === "owner" ? "#F0B45B" : "#5a4a20" }} />
-            <span className="text-sm font-medium" style={{ color: role === "owner" ? "#F0B45B" : "#5a4a20" }}>
+            <span className="text-sm font-medium" style={{ color: role === "owner" ? "#F0B45B" : "#1a1a2e" }}>
               Post Jobs
             </span>
             <span className="text-xs" style={{ color: "#7a6a30" }}>
@@ -113,12 +113,12 @@ export default function RegisterPage() {
             onClick={() => setRole("worker")}
             className="flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all"
             style={{
-              borderColor: role === "worker" ? "#1a1a2e" : "rgba(255,255,255,0.15)",
-              backgroundColor: role === "worker" ? "rgba(255,255,255,0.5)" : "rgba(255,255,255,0.04)",
+              borderColor: role === "worker" ? "#1a1a2e" : "rgba(15,23,42,0.12)",
+              backgroundColor: role === "worker" ? "#1a1a2e" : "#ffffff",
             }}
           >
             <Briefcase className="w-6 h-6" style={{ color: role === "worker" ? "#F0B45B" : "#5a4a20" }} />
-            <span className="text-sm font-medium" style={{ color: role === "worker" ? "#F0B45B" : "#5a4a20" }}>
+            <span className="text-sm font-medium" style={{ color: role === "worker" ? "#F0B45B" : "#1a1a2e" }}>
               Find Work
             </span>
             <span className="text-xs" style={{ color: "#7a6a30" }}>

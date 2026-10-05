@@ -50,12 +50,12 @@ export default function ReviewModal({ open, jobId, revieweeId, onClose, onSubmit
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative rounded-2xl p-6 w-full max-w-md shadow-xl animate-fade-in" style={{ backgroundColor: "#1a1a1a", border: "1px solid #333" }}>
-        <button onClick={onClose} className="absolute top-4 right-4 hover:text-white transition-colors" style={{ color: "#aaa" }}>
+      <div className="relative rounded-2xl p-6 w-full max-w-md shadow-xl animate-fade-in" style={{ backgroundColor: "#ffffff", border: "1px solid rgba(15,23,42,0.1)", boxShadow: "0 20px 25px -5px rgba(15,23,42,0.1)" }}>
+        <button onClick={onClose} className="absolute top-4 right-4 hover:text-black transition-colors" style={{ color: "#5a4a20" }}>
           <X className="w-5 h-5" />
         </button>
-        <h3 className="text-lg font-semibold mb-2 text-white">Rate this worker</h3>
-        <p className="text-sm mb-6" style={{ color: "#aaa" }}>How was your experience?</p>
+        <h3 className="text-lg font-semibold mb-2" style={{ color: "#1a1a2e" }}>Rate this worker</h3>
+        <p className="text-sm mb-6" style={{ color: "#5a4a20" }}>How was your experience?</p>
 
         {error && (
           <div className="mb-4 p-3 rounded-lg text-sm" style={{ backgroundColor: "rgba(255,80,80,0.15)", color: "#ff6b6b" }}>
@@ -86,7 +86,7 @@ export default function ReviewModal({ open, jobId, revieweeId, onClose, onSubmit
               type="button"
               onClick={onClose}
               className="px-5 py-2.5 rounded-xl text-sm transition-colors"
-              style={{ border: "1px solid rgba(255,255,255,0.15)", color: "#aaa" }}
+              style={{ border: "1px solid rgba(15,23,42,0.15)", color: "#5a4a20" }}
             >
               Cancel
             </button>

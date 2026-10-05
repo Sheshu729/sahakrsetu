@@ -100,21 +100,21 @@ export default function WorkerJobDetailPage() {
     return (
       <div className="p-6">
         <div className="max-w-3xl mx-auto">
-          <div className="h-4 w-24 rounded mb-6 animate-pulse" style={{ backgroundColor: "rgba(255,255,255,0.2)" }} />
-          <div className="rounded-xl p-6 animate-pulse" style={{ backgroundColor: "rgba(255,255,255,0.35)", backdropFilter: "blur(20px)", border: "1px solid rgba(255,255,255,0.5)" }}>
+          <div className="h-4 w-24 rounded mb-6 animate-pulse" style={{ backgroundColor: "rgba(15,23,42,0.06)" }} />
+          <div className="rounded-xl p-6 animate-pulse" style={{ backgroundColor: "#ffffff", border: "1px solid rgba(15,23,42,0.08)", boxShadow: "0 1px 2px rgba(15,23,42,0.04)" }}>
             <div className="flex items-center gap-3 mb-4">
-              <div className="h-7 w-64 rounded" style={{ backgroundColor: "rgba(255,255,255,0.2)" }} />
-              <div className="h-5 w-16 rounded-full" style={{ backgroundColor: "rgba(255,255,255,0.2)" }} />
+              <div className="h-7 w-64 rounded" style={{ backgroundColor: "rgba(15,23,42,0.06)" }} />
+              <div className="h-5 w-16 rounded-full" style={{ backgroundColor: "rgba(15,23,42,0.06)" }} />
             </div>
-            <div className="h-5 w-24 rounded-full mb-4" style={{ backgroundColor: "rgba(255,255,255,0.2)" }} />
-            <div className="h-4 w-full rounded mb-2" style={{ backgroundColor: "rgba(255,255,255,0.2)" }} />
-            <div className="h-4 w-3/4 rounded mb-6" style={{ backgroundColor: "rgba(255,255,255,0.2)" }} />
+            <div className="h-5 w-24 rounded-full mb-4" style={{ backgroundColor: "rgba(15,23,42,0.06)" }} />
+            <div className="h-4 w-full rounded mb-2" style={{ backgroundColor: "rgba(15,23,42,0.06)" }} />
+            <div className="h-4 w-3/4 rounded mb-6" style={{ backgroundColor: "rgba(15,23,42,0.06)" }} />
             <div className="flex gap-6 mb-4">
-              <div className="h-4 w-28 rounded" style={{ backgroundColor: "rgba(255,255,255,0.2)" }} />
-              <div className="h-4 w-24 rounded" style={{ backgroundColor: "rgba(255,255,255,0.2)" }} />
-              <div className="h-4 w-28 rounded" style={{ backgroundColor: "rgba(255,255,255,0.2)" }} />
+              <div className="h-4 w-28 rounded" style={{ backgroundColor: "rgba(15,23,42,0.06)" }} />
+              <div className="h-4 w-24 rounded" style={{ backgroundColor: "rgba(15,23,42,0.06)" }} />
+              <div className="h-4 w-28 rounded" style={{ backgroundColor: "rgba(15,23,42,0.06)" }} />
             </div>
-            <div className="h-4 w-40 rounded" style={{ backgroundColor: "rgba(255,255,255,0.2)" }} />
+            <div className="h-4 w-40 rounded" style={{ backgroundColor: "rgba(15,23,42,0.06)" }} />
           </div>
         </div>
       </div>
@@ -139,12 +139,12 @@ export default function WorkerJobDetailPage() {
           <ArrowLeft className="w-4 h-4" /> Back to jobs
         </Link>
 
-        <div className="rounded-xl p-6 mb-6" style={{ backgroundColor: "rgba(255,255,255,0.35)", backdropFilter: "blur(20px)", border: "1px solid rgba(255,255,255,0.5)" }}>
+        <div className="rounded-xl p-6 mb-6" style={{ backgroundColor: "#ffffff", border: "1px solid rgba(15,23,42,0.08)", boxShadow: "0 1px 2px rgba(15,23,42,0.04)" }}>
           <div className="flex items-center gap-3 mb-4">
             <h1 className="text-2xl font-bold" style={{ color: "#1a1a2e" }}>{job.title}</h1>
             <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${STATUS_COLORS[job.status]}`}>{job.status}</span>
           </div>
-          <span className="inline-block px-2.5 py-0.5 rounded-full text-xs font-medium mb-4" style={{ backgroundColor: "rgba(255,255,255,0.35)", color: "#5a4a20", border: "1px solid rgba(255,255,255,0.5)" }}>
+          <span className="inline-block px-2.5 py-0.5 rounded-full text-xs font-medium mb-4" style={{ backgroundColor: "rgba(15,23,42,0.04)", color: "#5a4a20", border: "1px solid rgba(15,23,42,0.1)" }}>
             {JOB_CATEGORIES.find((c) => c.value === job.category)?.label}
           </span>
           <p className="leading-relaxed mb-6" style={{ color: "#5a4a20" }}>{job.description}</p>
@@ -154,7 +154,7 @@ export default function WorkerJobDetailPage() {
             <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4" /> {formatDate(job.created_at)}</span>
           </div>
 
-          <div className="flex items-center justify-between mt-4 pt-4" style={{ borderTop: "1px solid rgba(255,255,255,0.5)" }}>
+          <div className="flex items-center justify-between mt-4 pt-4" style={{ borderTop: "1px solid rgba(15,23,42,0.08)" }}>
             <div>
               <p className="text-sm" style={{ color: "#5a4a20" }}>Posted by {job.profiles?.full_name}</p>
               {job.profiles?.skills && job.profiles.skills.length > 0 && (
@@ -168,7 +168,7 @@ export default function WorkerJobDetailPage() {
               onClick={handleMessageOwner}
               disabled={messaging || user?.id === job.owner_id}
               className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
-              style={{ backgroundColor: "rgba(255,255,255,0.35)", border: "1px solid rgba(255,255,255,0.5)", color: "#5a4a20" }}
+              style={{ backgroundColor: "#ffffff", border: "1px solid rgba(15,23,42,0.12)", color: "#1a1a2e" }}
             >
               <MessageCircle className="w-4 h-4" />
               {messaging ? "Starting..." : "Message Owner"}
@@ -180,7 +180,7 @@ export default function WorkerJobDetailPage() {
               <h3 className="text-sm font-medium mb-3" style={{ color: "#7a6a30" }}>Media</h3>
               <div className="grid grid-cols-3 gap-3">
                 {job.media_urls.map((url, i) => (
-                  <img key={i} src={url} alt="" className="w-full h-32 object-cover rounded-lg" style={{ border: "1px solid rgba(255,255,255,0.5)" }} />
+                  <img key={i} src={url} alt="" className="w-full h-32 object-cover rounded-lg" style={{ border: "1px solid rgba(15,23,42,0.08)" }} />
                 ))}
               </div>
             </div>
@@ -188,11 +188,11 @@ export default function WorkerJobDetailPage() {
         </div>
 
         {job.status !== "open" && !hasApplied ? (
-          <div className="rounded-xl p-6 text-center" style={{ backgroundColor: "rgba(255,255,255,0.35)", backdropFilter: "blur(20px)", border: "1px solid rgba(255,255,255,0.5)" }}>
+          <div className="rounded-xl p-6 text-center" style={{ backgroundColor: "#ffffff", border: "1px solid rgba(15,23,42,0.08)", boxShadow: "0 1px 2px rgba(15,23,42,0.04)" }}>
             <p style={{ color: "#5a4a20" }}>This job is no longer accepting applications</p>
           </div>
         ) : hasApplied ? (
-          <div className="rounded-xl p-6 text-center" style={{ backgroundColor: "rgba(255,255,255,0.35)", backdropFilter: "blur(20px)", border: "1px solid rgba(255,255,255,0.5)" }}>
+          <div className="rounded-xl p-6 text-center" style={{ backgroundColor: "#ffffff", border: "1px solid rgba(15,23,42,0.08)", boxShadow: "0 1px 2px rgba(15,23,42,0.04)" }}>
             <p className="font-medium" style={{ color: "#1a1a2e" }}>You have already applied to this job</p>
             <Link href="/worker/applications" className="text-sm mt-2 inline-block" style={{ color: "#F0B45B" }}>View your applications</Link>
           </div>
@@ -203,7 +203,7 @@ export default function WorkerJobDetailPage() {
             <Link href="/worker" className="text-sm hover:underline mt-3 inline-block" style={{ color: "#F0B45B" }}>Browse more jobs</Link>
           </div>
         ) : (
-          <div className="rounded-xl p-6" style={{ backgroundColor: "rgba(255,255,255,0.35)", backdropFilter: "blur(20px)", border: "1px solid rgba(255,255,255,0.5)" }}>
+          <div className="rounded-xl p-6" style={{ backgroundColor: "#ffffff", border: "1px solid rgba(15,23,42,0.08)", boxShadow: "0 1px 2px rgba(15,23,42,0.04)" }}>
             <h2 className="text-lg font-semibold mb-4" style={{ color: "#1a1a2e" }}>Apply for this job</h2>
             {error && (
               <div className="mb-4 p-3 rounded-lg text-sm" style={{ backgroundColor: "rgba(255,80,80,0.15)", color: "#ff6b6b" }}>{error}</div>

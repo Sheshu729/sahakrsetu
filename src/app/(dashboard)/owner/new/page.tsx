@@ -231,7 +231,7 @@ export default function NewPostPage() {
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
                 className="flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm transition-colors"
-                style={{ border: "1px solid rgba(255,255,255,0.5)", color: "#5a4a20" }}
+                style={{ border: "1px solid rgba(15,23,42,0.12)", color: "#1a1a2e" }}
               >
                 <Upload className="w-4 h-4" /> Upload
               </button>
@@ -239,7 +239,7 @@ export default function NewPostPage() {
                 type="button"
                 onClick={startCamera}
                 className="flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm transition-colors"
-                style={{ border: "1px solid rgba(255,255,255,0.5)", color: "#5a4a20" }}
+                style={{ border: "1px solid rgba(15,23,42,0.12)", color: "#1a1a2e" }}
               >
                 <Camera className="w-4 h-4" /> Camera
               </button>
@@ -254,7 +254,7 @@ export default function NewPostPage() {
             <canvas ref={canvasRef} className="hidden" />
 
             {showCamera && (
-              <div className="relative rounded-lg overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.15)" }}>
+              <div className="relative rounded-lg overflow-hidden" style={{ border: "1px solid rgba(15,23,42,0.1)" }}>
                 <video ref={videoRef} autoPlay playsInline className="w-full rounded-lg" />
                 <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-3">
                   <button
@@ -269,7 +269,7 @@ export default function NewPostPage() {
                     type="button"
                     onClick={stopCamera}
                     className="px-6 py-2.5 rounded-lg font-medium transition-colors"
-                    style={{ backgroundColor: "rgba(255,255,255,0.5)", color: "#5a4a20", border: "1px solid rgba(255,255,255,0.5)" }}
+                    style={{ backgroundColor: "#ffffff", color: "#1a1a2e", border: "1px solid rgba(15,23,42,0.12)" }}
                   >
                     Cancel
                   </button>

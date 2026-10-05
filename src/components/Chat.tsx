@@ -87,7 +87,7 @@ export default function Chat({ conversationId, currentUserId }: ChatProps) {
         <div ref={bottomRef} />
       </div>
 
-      <form onSubmit={handleSend} className="p-4 border-t" style={{ borderColor: "rgba(255,255,255,0.1)" }}>
+      <form onSubmit={handleSend} className="p-4 border-t" style={{ borderColor: "rgba(15,23,42,0.08)" }}>
         <div className="flex gap-2">
           <input
             type="text"

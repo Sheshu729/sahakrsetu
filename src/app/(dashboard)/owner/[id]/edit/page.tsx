@@ -65,13 +65,13 @@ export default function EditJobPage() {
     return (
       <div className="p-8">
         <div className="max-w-2xl mx-auto">
-          <div className="h-4 w-24 rounded mb-6 animate-pulse" style={{ backgroundColor: "rgba(255,255,255,0.2)" }} />
-          <div className="rounded-xl p-6 animate-pulse space-y-4" style={{ backgroundColor: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>
-            <div className="h-10 rounded" style={{ backgroundColor: "rgba(255,255,255,0.2)" }} />
-            <div className="h-24 rounded" style={{ backgroundColor: "rgba(255,255,255,0.2)" }} />
-            <div className="h-10 rounded" style={{ backgroundColor: "rgba(255,255,255,0.2)" }} />
-            <div className="h-10 rounded" style={{ backgroundColor: "rgba(255,255,255,0.2)" }} />
-            <div className="h-10 rounded" style={{ backgroundColor: "rgba(255,255,255,0.2)" }} />
+          <div className="h-4 w-24 rounded mb-6 animate-pulse" style={{ backgroundColor: "rgba(15,23,42,0.06)" }} />
+          <div className="rounded-xl p-6 animate-pulse space-y-4" style={{ backgroundColor: "#ffffff", border: "1px solid rgba(15,23,42,0.08)" }}>
+            <div className="h-10 rounded" style={{ backgroundColor: "rgba(15,23,42,0.06)" }} />
+            <div className="h-24 rounded" style={{ backgroundColor: "rgba(15,23,42,0.06)" }} />
+            <div className="h-10 rounded" style={{ backgroundColor: "rgba(15,23,42,0.06)" }} />
+            <div className="h-10 rounded" style={{ backgroundColor: "rgba(15,23,42,0.06)" }} />
+            <div className="h-10 rounded" style={{ backgroundColor: "rgba(15,23,42,0.06)" }} />
           </div>
         </div>
       </div>
@@ -89,7 +89,7 @@ export default function EditJobPage() {
           <ArrowLeft className="w-4 h-4" /> Back to job
         </Link>
 
-        <div className="rounded-xl p-6" style={{ backgroundColor: "rgba(255,255,255,0.35)", backdropFilter: "blur(20px)", border: "1px solid rgba(255,255,255,0.5)" }}>
+        <div className="rounded-xl p-6" style={{ backgroundColor: "#ffffff", border: "1px solid rgba(15,23,42,0.08)", boxShadow: "0 1px 2px rgba(15,23,42,0.04)" }}>
           <h1 className="text-2xl font-bold mb-6" style={{ color: "#1a1a2e" }}>Edit Job</h1>
 
           <form onSubmit={handleSubmit} className="space-y-5">

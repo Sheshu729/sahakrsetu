@@ -65,7 +65,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 border-b" style={{ backgroundColor: "rgba(255,255,255,0.3)", backdropFilter: "blur(20px)", borderColor: "rgba(255,255,255,0.5)" }}>
+      <nav className="sticky top-0 z-50 border-b" style={{ backgroundColor: "rgba(255,255,255,0.9)", backdropFilter: "blur(20px)", borderColor: "rgba(15,23,42,0.08)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Link href="/" className="flex items-center gap-2 font-bold text-lg" style={{ color: "#1a1a2e" }}>
@@ -82,8 +82,8 @@ export default function Navbar() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="flex items-center gap-2 px-3 py-2 rounded-full text-sm transition-colors"
-                    style={{ color: isActive ? "#F0B45B" : "#5a4a20" }}
+                    className="flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium transition-colors"
+                    style={{ color: isActive ? "#000000" : "#1a1a2e", backgroundColor: isActive ? "rgba(0,0,0,0.08)" : "transparent" }}
                   >
                     <link.icon className="w-4 h-4" />
                     {link.label}
@@ -92,15 +92,15 @@ export default function Navbar() {
               })}
               <Link
                 href={profileHref}
-                className="flex items-center gap-2 px-3 py-2 rounded-full text-sm transition-colors"
-                style={{ color: "#5a4a20" }}
+                className="flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium transition-colors"
+                style={{ color: pathname.startsWith(profileHref) ? "#000000" : "#1a1a2e", backgroundColor: pathname.startsWith(profileHref) ? "rgba(0,0,0,0.08)" : "transparent" }}
               >
                 Profile
               </Link>
               <Link
                 href={messagesHref}
                 className="relative p-2 rounded-full transition-colors"
-                style={{ color: "#5a4a20" }}
+                style={{ color: "#1a1a2e" }}
                 title="Notifications"
               >
                 <Bell className="w-4 h-4" />
@@ -122,15 +122,16 @@ export default function Navbar() {
                 </span>
                 <span className="text-sm" style={{ color: "#1a1a2e" }}>
                   {user.full_name}
-                  <span className="ml-2 px-2 py-0.5 rounded text-xs" style={{ backgroundColor: "#1a1a2e", color: "#F0B45B" }}>
+                  <span className="ml-2 px-2 py-0.5 rounded text-xs font-medium" style={{ backgroundColor: "#1a1a2e", color: "#F0B45B" }}>
                     {user.role}
                   </span>
                 </span>
               </div>
               <button
                 onClick={signOut}
-                className="text-sm transition-colors hover:text-[#ff6b6b]"
-                style={{ color: "#5a4a20" }}
+                type="button"
+                className="text-sm font-medium transition-colors hover:text-black"
+                style={{ color: "#1a1a2e" }}
               >
                 Sign out
               </button>
@@ -138,8 +139,9 @@ export default function Navbar() {
 
             <button
               onClick={() => setMobileOpen(true)}
+              type="button"
               className="md:hidden p-2 rounded-full transition-colors"
-              style={{ color: "#5a4a20" }}
+              style={{ color: "#1a1a2e" }}
             >
               <Menu className="w-5 h-5" />
             </button>
@@ -182,8 +184,8 @@ export default function Navbar() {
                     key={link.href}
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="flex items-center gap-3 px-4 py-3 rounded-full transition-colors"
-                    style={{ color: isActive ? "#F0B45B" : "#5a4a20" }}
+                    className="flex items-center gap-3 px-4 py-3 rounded-full transition-colors font-medium"
+                    style={{ color: isActive ? "#000000" : "#1a1a2e", backgroundColor: isActive ? "rgba(0,0,0,0.08)" : "transparent" }}
                   >
                     <link.icon className="w-5 h-5" />
                     {link.label}
@@ -193,16 +195,16 @@ export default function Navbar() {
               <Link
                 href={profileHref}
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center gap-3 px-4 py-3 rounded-full transition-colors"
-                style={{ color: "#5a4a20" }}
+                className="flex items-center gap-3 px-4 py-3 rounded-full transition-colors font-medium"
+                style={{ color: "#1a1a2e" }}
               >
                 Profile
               </Link>
               <Link
                 href={messagesHref}
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center gap-3 px-4 py-3 rounded-full transition-colors"
-                style={{ color: "#5a4a20" }}
+                className="flex items-center gap-3 px-4 py-3 rounded-full transition-colors font-medium"
+                style={{ color: "#1a1a2e" }}
               >
                 <Bell className="w-5 h-5" />
                 Notifications
@@ -232,8 +234,9 @@ export default function Navbar() {
                   setMobileOpen(false);
                   signOut();
                 }}
-                className="flex items-center gap-3 w-full px-4 py-3 rounded-full transition-colors hover:text-[#ff6b6b]"
-                style={{ color: "#5a4a20" }}
+                type="button"
+                className="flex items-center gap-3 w-full px-4 py-3 rounded-full transition-colors font-medium hover:text-[#ff6b6b]"
+                style={{ color: "#1a1a2e" }}
               >
                 <LogOut className="w-5 h-5" />
                 Sign out

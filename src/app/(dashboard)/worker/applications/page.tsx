@@ -56,7 +56,7 @@ export default function WorkerApplicationsPage() {
         </div>
 
         {applications.length === 0 ? (
-          <div className="text-center py-20 rounded-xl" style={{ backgroundColor: "rgba(255,255,255,0.35)", backdropFilter: "blur(20px)", border: "1px solid rgba(255,255,255,0.5)" }}>
+          <div className="text-center py-20 rounded-xl" style={{ backgroundColor: "#ffffff", border: "1px solid rgba(15,23,42,0.08)", boxShadow: "0 1px 2px rgba(15,23,42,0.04)" }}>
             <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ backgroundColor: "#1a1a2e" }}>
               <FileText className="w-8 h-8" style={{ color: "#F0B45B" }} />
             </div>
@@ -69,14 +69,14 @@ export default function WorkerApplicationsPage() {
         ) : (
           <div className="space-y-4">
             {applications.map((app) => (
-              <div key={app.id} className="p-6 rounded-xl" style={{ backgroundColor: "rgba(255,255,255,0.35)", backdropFilter: "blur(20px)", border: "1px solid rgba(255,255,255,0.5)" }}>
+              <div key={app.id} className="p-6 rounded-xl" style={{ backgroundColor: "#ffffff", border: "1px solid rgba(15,23,42,0.08)", boxShadow: "0 1px 2px rgba(15,23,42,0.04)" }}>
                 <div className="flex items-start justify-between mb-3">
                   <div>
                     <div className="flex items-center gap-3 mb-1">
                       <h3 className="text-lg font-semibold" style={{ color: "#1a1a2e" }}>{app.job_posts?.title}</h3>
                       <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${STATUS_COLORS[app.status]}`}>{app.status}</span>
                     </div>
-                    <span className="px-2.5 py-0.5 rounded-full text-xs font-medium" style={{ backgroundColor: "rgba(255,255,255,0.35)", color: "#5a4a20", border: "1px solid rgba(255,255,255,0.5)" }}>
+                    <span className="px-2.5 py-0.5 rounded-full text-xs font-medium" style={{ backgroundColor: "rgba(15,23,42,0.04)", color: "#5a4a20", border: "1px solid rgba(15,23,42,0.1)" }}>
                       {JOB_CATEGORIES.find((c) => c.value === app.job_posts?.category)?.label}
                     </span>
                   </div>

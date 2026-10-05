@@ -40,8 +40,8 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4" style={{ background: "linear-gradient(180deg, #c8850a 0%, #d4940a 20%, #F0B45B 50%, #f5c878 80%, #fae3a0 100%)", fontFamily: "'Google Sans', 'Roboto', system-ui, sans-serif" }}>
-      <div className="w-full max-w-md p-10 rounded-2xl border" style={{ backgroundColor: "rgba(255,255,255,0.35)", borderColor: "rgba(255,255,255,0.5)", backdropFilter: "blur(20px)" }}>
+    <div className="min-h-screen flex items-center justify-center px-4" style={{ background: "linear-gradient(180deg, #f7f8fa 0%, #eef1f5 50%, #e8ecf2 100%)", fontFamily: "'Google Sans', 'Roboto', system-ui, sans-serif" }}>
+      <div className="w-full max-w-md p-10 rounded-2xl border" style={{ backgroundColor: "#ffffff", borderColor: "rgba(15,23,42,0.08)", boxShadow: "0 4px 24px rgba(15,23,42,0.06)" }}>
         <div className="flex flex-col items-center mb-8">
           <div className="w-12 h-12 rounded-full flex items-center justify-center mb-4" style={{ backgroundColor: "#1a1a2e" }}>
             <Wrench className="w-6 h-6" style={{ color: "#F0B45B" }} />
