@@ -252,9 +252,9 @@ export default function LandingPage() {
       <section className="py-16 px-4">
         <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
           {statCards.map((stat) => (
-            <div key={stat.label} className="p-6 rounded-2xl text-center border" style={{ backgroundColor: "rgba(255,255,255,0.1)", borderColor: "rgba(255,255,255,0.2)" }}>
-              <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
-              <div className="text-sm" style={{ color: "#ccc" }}>{stat.label}</div>
+            <div key={stat.label} className="p-6 rounded-2xl text-center border" style={{ backgroundColor: "rgba(255,255,255,0.75)", borderColor: "rgba(0,0,0,0.12)" }}>
+              <div className="text-3xl font-bold mb-1" style={{ color: "#1a1a2e" }}>{stat.value}</div>
+              <div className="text-sm" style={{ color: "#555" }}>{stat.label}</div>
             </div>
           ))}
         </div>
@@ -264,25 +264,25 @@ export default function LandingPage() {
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-semibold mb-3 text-white">What people are saying</h2>
-            <p className="text-sm" style={{ color: "#aaa" }}>What the community says about HomeWork Connect</p>
+            <h2 className="text-3xl font-semibold mb-3" style={{ color: "#1a1a2e" }}>What people are saying</h2>
+            <p className="text-sm" style={{ color: "#555" }}>What the community says about HomeWork Connect</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {testimonials.map((t) => (
-              <div key={t.name} className="p-6 rounded-2xl transition-all hover:shadow-lg" style={{ backgroundColor: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>
+              <div key={t.name} className="p-6 rounded-2xl transition-all hover:shadow-lg" style={{ backgroundColor: "rgba(255,255,255,0.8)", border: "1px solid rgba(0,0,0,0.1)" }}>
                 <div className="flex gap-0.5 mb-3">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="w-4 h-4" style={{ color: i < t.stars ? "#ffd43b" : "rgba(255,255,255,0.2)", fill: i < t.stars ? "#ffd43b" : "none" }} />
+                    <Star key={i} className="w-4 h-4" style={{ color: i < t.stars ? "#f0a500" : "rgba(0,0,0,0.2)", fill: i < t.stars ? "#f0a500" : "none" }} />
                   ))}
                 </div>
-                <p className="text-sm mb-4 leading-relaxed text-white">&ldquo;{t.text}&rdquo;</p>
+                <p className="text-sm mb-4 leading-relaxed" style={{ color: "#1a1a2e" }}>&ldquo;{t.text}&rdquo;</p>
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full flex items-center justify-center text-white text-xs font-bold" style={{ backgroundColor: "rgba(255,255,255,0.1)" }}>
+                  <div className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold" style={{ backgroundColor: "rgba(26,26,46,0.1)", color: "#1a1a2e" }}>
                     {t.name.split(" ").map((n) => n[0]).join("")}
                   </div>
                   <div>
-                    <div className="text-sm font-medium text-white">{t.name}</div>
-                    <div className="text-xs" style={{ color: "#aaa" }}>{t.role}</div>
+                    <div className="text-sm font-medium" style={{ color: "#1a1a2e" }}>{t.name}</div>
+                    <div className="text-xs" style={{ color: "#555" }}>{t.role}</div>
                   </div>
                 </div>
               </div>
