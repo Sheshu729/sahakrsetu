@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Wrench,
   Search,
@@ -66,9 +66,48 @@ const testimonials = [
   { name: "Anjali Patel", role: "Homeowner", stars: 4, text: "I've used this for painting and carpentry work. The quality of workers is outstanding and the process is seamless." },
 ];
 
+const stagger = (i: number, step = 80) =>
+  ({ "--reveal-delay": `${i * step}ms` }) as React.CSSProperties;
+
 export default function LandingPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [stats, setStats] = useState<Stats | null>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const targets = rootRef.current?.querySelectorAll("[data-reveal]");
+    if (!targets?.length) return;
+
+    // Drop the animation once it finishes: `animation-fill-mode: both` would
+    // otherwise pin the final transform and block .lift hover transitions.
+    const release = (el: Element) => {
+      el.classList.remove("is-revealed");
+      el.removeAttribute("data-reveal");
+    };
+    const onEnd = (e: AnimationEvent) => {
+      // Child animations (drift blobs) bubble; only react to our reveal.
+      const name = e.animationName;
+      if (name !== "reveal-up" && name !== "reveal-in") return;
+      const el = e.currentTarget as HTMLElement;
+      el.style.willChange = "";
+      el.removeEventListener("animationend", onEnd);
+      release(el);
+    };
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          entry.target.classList.add("is-revealed");
+          entry.target.addEventListener("animationend", onEnd as EventListener);
+          io.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
+    );
+    targets.forEach((t) => io.observe(t));
+    return () => io.disconnect();
+  }, []);
 
   useEffect(() => {
     fetch("/api/stats")
@@ -85,9 +124,9 @@ export default function LandingPage() {
   ];
 
   return (
-    <div className="min-h-screen" style={{ fontFamily: "'Google Sans', 'Roboto', system-ui, sans-serif", background: "linear-gradient(180deg, #000000 0%, #1a1a1a 15%, #333333 30%, #555555 45%, #777777 55%, #999999 65%, #bbbbbb 75%, #dddddd 85%, #f0f0f0 95%, #ffffff 100%)" }}>
+    <div ref={rootRef} className="min-h-screen" style={{ fontFamily: "'Google Sans', 'Roboto', system-ui, sans-serif", background: "linear-gradient(180deg, #000000 0%, #1a1a1a 15%, #333333 30%, #555555 45%, #777777 55%, #999999 65%, #bbbbbb 75%, #dddddd 85%, #f0f0f0 95%, #ffffff 100%)" }}>
       {/* Navbar */}
-      <nav className="sticky top-0 z-50 border-b" style={{ borderColor: "#333", backgroundColor: "rgba(13,13,13,0.9)", backdropFilter: "blur(20px)" }}>
+      <nav className="sticky top-0 z-50 border-b press" style={{ borderColor: "#333", backgroundColor: "rgba(13,13,13,0.9)", backdropFilter: "blur(20px)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           {/* Left: Logo + Brand */}
           <Link href="/" className="flex items-center gap-2.5">
@@ -107,7 +146,7 @@ export default function LandingPage() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium transition-colors hover:text-white"
+                className="text-sm font-medium transition-colors duration-300 ease-out hover:text-white"
                 style={{ color: "#999" }}
               >
                 {link.name}
@@ -119,7 +158,7 @@ export default function LandingPage() {
           <div className="hidden lg:flex items-center gap-3">
             {/* Location selector */}
             <button
-              className="flex items-center gap-2 px-4 py-2 rounded-full border text-sm transition-colors hover:bg-white/5"
+              className="press flex items-center gap-2 px-4 py-2 rounded-full border text-sm transition-colors duration-300 hover:bg-white/5"
               style={{ borderColor: "#444", color: "#ccc" }}
             >
               <MapPin className="w-4 h-4 text-white" />
@@ -153,8 +192,9 @@ export default function LandingPage() {
             {/* Left (60%) - Heading + Service Category Grid */}
             <div className="lg:col-span-3">
               <h1
+                data-reveal
                 className="font-bold leading-tight mb-8 text-white"
-                style={{ fontSize: "clamp(36px, 5vw, 56px)" }}
+                style={{ fontSize: "clamp(36px, 5vw, 56px)", ...stagger(0) }}
               >
                 Home services
                 <br />
@@ -163,30 +203,32 @@ export default function LandingPage() {
 
               {/* Service Category Grid Container */}
               <div
+                data-reveal
                 className="inline-block rounded-3xl border p-6"
-                style={{ borderColor: "#343a40", backgroundColor: "#1a1a1a" }}
+                style={{ borderColor: "#343a40", backgroundColor: "#1a1a1a", ...stagger(1, 120) }}
               >
                 <div className="grid grid-cols-4 gap-4">
-                  {serviceCategories.map((cat) => (
+                  {serviceCategories.map((cat, i) => (
                     <Link
                       key={cat.name}
                       href="/register"
-                      className="flex flex-col rounded-2xl overflow-hidden transition-all hover:scale-[1.03] cursor-pointer group"
-                      style={{ backgroundColor: "#2a2a2a", border: "1px solid #3a3a3a" }}
+                      data-reveal="scale"
+                      className="lift-soft press flex flex-col rounded-2xl overflow-hidden cursor-pointer group"
+                      style={{ backgroundColor: "#2a2a2a", border: "1px solid #3a3a3a", ...stagger(i, 45) }}
                     >
                       <div className="w-full h-28 overflow-hidden bg-[#f0f0f0]">
                         <img
                           src={cat.img}
                           alt={cat.name}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                          className="w-full h-full object-cover group-hover:scale-[1.08] transition-transform duration-700 ease-out"
                           loading="lazy"
                         />
                       </div>
                       <div className="flex items-center justify-between px-3 py-2.5">
-                        <span className="text-xs font-semibold" style={{ color: "#e0e0e0" }}>
-                          {cat.name}
-                        </span>
-                        <ArrowRight className="w-3.5 h-3.5" style={{ color: "#888" }} />
+                      <span className="text-xs font-semibold" style={{ color: "#e0e0e0" }}>
+                        {cat.name}
+                      </span>
+                      <ArrowRight className="w-3.5 h-3.5 transition-transform duration-500 ease-out group-hover:translate-x-1" style={{ color: "#888" }} />
                       </div>
                     </Link>
                   ))}
@@ -198,7 +240,7 @@ export default function LandingPage() {
             <div className="lg:col-span-2 hidden lg:block">
               <div className="grid grid-cols-2 gap-3">
                 {/* Top: large image spanning full width */}
-                <div className="col-span-2">
+                <div className="col-span-2 drift-slow">
                   <img
                     src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=500&h=600&fit=crop"
                     alt="Plumber at work"
@@ -206,7 +248,7 @@ export default function LandingPage() {
                   />
                 </div>
                 {/* Bottom left */}
-                <div>
+                <div className="drift-mid">
                   <img
                     src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=500&h=300&fit=crop"
                     alt="Electrician at work"
@@ -214,7 +256,7 @@ export default function LandingPage() {
                   />
                 </div>
                 {/* Bottom right */}
-                <div>
+                <div className="drift-fast">
                   <img
                     src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=500&h=300&fit=crop"
                     alt="Cleaning service"
@@ -231,12 +273,12 @@ export default function LandingPage() {
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-semibold mb-3 text-white">How it works</h2>
-            <p className="text-sm" style={{ color: "#bbb" }}>Three simple steps to get your job done</p>
+            <h2 data-reveal className="text-3xl font-semibold mb-3 text-white">How it works</h2>
+            <p data-reveal className="text-sm" style={{ color: "#bbb", ...stagger(1, 110) }}>Three simple steps to get your job done</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {steps.map((step) => (
-              <div key={step.num} className="relative flex flex-col items-center text-center p-8 rounded-2xl border transition-all hover:shadow-lg" style={{ backgroundColor: "rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.1)" }}>
+            {steps.map((step, i) => (
+              <div key={step.num} data-reveal className="lift relative flex flex-col items-center text-center p-8 rounded-2xl border" style={{ backgroundColor: "rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.1)", boxShadow: "0 1px 2px rgba(0,0,0,0.08)", ...stagger(i, 110) }}>
                 <div className="w-14 h-14 rounded-full flex items-center justify-center text-black font-bold text-lg mb-5" style={{ backgroundColor: "#fff" }}>
                   {step.num}
                 </div>
@@ -251,8 +293,8 @@ export default function LandingPage() {
       {/* Stats */}
       <section className="py-16 px-4">
         <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
-          {statCards.map((stat) => (
-            <div key={stat.label} className="p-6 rounded-2xl text-center border" style={{ backgroundColor: "rgba(255,255,255,0.75)", borderColor: "rgba(0,0,0,0.12)" }}>
+          {statCards.map((stat, i) => (
+            <div key={stat.label} data-reveal className="lift-soft press p-6 rounded-2xl text-center border" style={{ backgroundColor: "rgba(255,255,255,0.75)", borderColor: "rgba(0,0,0,0.12)", ...stagger(i, 90) }}>
               <div className="text-3xl font-bold mb-1" style={{ color: "#1a1a2e" }}>{stat.value}</div>
               <div className="text-sm" style={{ color: "#555" }}>{stat.label}</div>
             </div>
@@ -264,15 +306,23 @@ export default function LandingPage() {
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-semibold mb-3" style={{ color: "#1a1a2e" }}>What people are saying</h2>
-            <p className="text-sm" style={{ color: "#555" }}>What the community says about HomeWork Connect</p>
+            <h2 data-reveal className="text-3xl font-semibold mb-3" style={{ color: "#1a1a2e" }}>What people are saying</h2>
+            <p data-reveal className="text-sm" style={{ color: "#555", ...stagger(1, 110) }}>What the community says about HomeWork Connect</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((t) => (
-              <div key={t.name} className="p-6 rounded-2xl transition-all hover:shadow-lg" style={{ backgroundColor: "rgba(255,255,255,0.8)", border: "1px solid rgba(0,0,0,0.1)" }}>
+            {testimonials.map((t, i) => (
+              <div key={t.name} data-reveal className="lift p-6 rounded-2xl" style={{ backgroundColor: "rgba(255,255,255,0.8)", border: "1px solid rgba(0,0,0,0.1)", boxShadow: "0 1px 2px rgba(0,0,0,0.06)", ...stagger(i, 110) }}>
                 <div className="flex gap-0.5 mb-3">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="w-4 h-4" style={{ color: i < t.stars ? "#f0a500" : "rgba(0,0,0,0.2)", fill: i < t.stars ? "#f0a500" : "none" }} />
+                    <Star
+                      key={i}
+                      className="w-4 h-4 transition-all duration-500 ease-out"
+                      style={{
+                        color: i < t.stars ? "#f0a500" : "rgba(0,0,0,0.2)",
+                        fill: i < t.stars ? "#f0a500" : "none",
+                        transitionDelay: `${i * 90}ms`,
+                      }}
+                    />
                   ))}
                 </div>
                 <p className="text-sm mb-4 leading-relaxed" style={{ color: "#1a1a2e" }}>&ldquo;{t.text}&rdquo;</p>
@@ -294,8 +344,8 @@ export default function LandingPage() {
       {/* CTA Cards */}
       <section className="py-20 px-4">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="p-8 rounded-2xl text-white relative overflow-hidden border" style={{ backgroundColor: "#222", borderColor: "#444" }}>
-            <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-white/5 -translate-y-1/2 translate-x-1/2" />
+          <div data-reveal className="lift p-8 rounded-2xl text-white relative overflow-hidden border" style={{ backgroundColor: "#222", borderColor: "#444", boxShadow: "0 1px 2px rgba(0,0,0,0.2)", ...stagger(0, 130) }}>
+            <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-white/5 blob-a" />
             <Home className="w-8 h-8 mb-4 relative z-10" />
             <h3 className="text-xl font-semibold mb-2 relative z-10">For Homeowners</h3>
             <p className="text-sm mb-6 leading-relaxed relative z-10" style={{ color: "#ccc" }}>
@@ -303,14 +353,14 @@ export default function LandingPage() {
             </p>
             <Link
               href="/register"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-all hover:shadow-lg relative z-10"
+              className="press inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium relative z-10 group/cta"
               style={{ backgroundColor: "rgba(255,255,255,0.5)", color: "#fff" }}
             >
-              Post a Job <ArrowRight className="w-4 h-4" />
+              Post a Job <ArrowRight className="w-4 h-4 transition-transform duration-500 ease-out group-hover/cta:translate-x-1" />
             </Link>
           </div>
-          <div className="p-8 rounded-2xl text-white relative overflow-hidden border" style={{ backgroundColor: "#333", borderColor: "#444" }}>
-            <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-white/5 -translate-y-1/2 translate-x-1/2" />
+          <div data-reveal className="lift p-8 rounded-2xl text-white relative overflow-hidden border" style={{ backgroundColor: "#333", borderColor: "#444", boxShadow: "0 1px 2px rgba(0,0,0,0.2)", ...stagger(1, 130) }}>
+            <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-white/5 blob-b" />
             <Briefcase className="w-8 h-8 mb-4 relative z-10" />
             <h3 className="text-xl font-semibold mb-2 relative z-10">For Workers</h3>
             <p className="text-sm mb-6 leading-relaxed relative z-10" style={{ color: "#ccc" }}>
@@ -318,10 +368,10 @@ export default function LandingPage() {
             </p>
             <Link
               href="/register"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-all hover:shadow-lg relative z-10"
+              className="press inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium relative z-10 group/cta"
               style={{ backgroundColor: "rgba(255,255,255,0.5)", color: "#fff" }}
             >
-              Find Work <ArrowRight className="w-4 h-4" />
+              Find Work <ArrowRight className="w-4 h-4 transition-transform duration-500 ease-out group-hover/cta:translate-x-1" />
             </Link>
           </div>
         </div>
@@ -330,7 +380,7 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="py-12 px-4 border-t" style={{ borderColor: "#ccc" }}>
         <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
-          <div>
+          <div data-reveal>
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: "#333" }}>
                 <Wrench className="w-4 h-4 text-white" />
@@ -341,7 +391,7 @@ export default function LandingPage() {
               Connecting homeowners with trusted workers for all home services.
             </p>
           </div>
-          <div>
+          <div data-reveal style={stagger(1, 90)}>
             <h4 className="text-sm font-semibold mb-3 text-white">Services</h4>
             <ul className="space-y-2">
               {serviceCategories.slice(0, 4).map((s) => (
@@ -351,7 +401,7 @@ export default function LandingPage() {
               ))}
             </ul>
           </div>
-          <div>
+          <div data-reveal style={stagger(2, 90)}>
             <h4 className="text-sm font-semibold mb-3 text-white">Company</h4>
             <ul className="space-y-2">
               <li><Link href="/" className="text-sm transition-colors hover:text-white" style={{ color: "#aaa" }}>About</Link></li>
@@ -360,7 +410,7 @@ export default function LandingPage() {
               <li><Link href="/login" className="text-sm transition-colors hover:text-white" style={{ color: "#aaa" }}>Sign In</Link></li>
             </ul>
           </div>
-          <div>
+          <div data-reveal style={stagger(3, 90)}>
             <h4 className="text-sm font-semibold mb-3 text-white">Support</h4>
             <ul className="space-y-2">
               <li><Link href="/register" className="text-sm transition-colors hover:text-white" style={{ color: "#aaa" }}>Get Started</Link></li>

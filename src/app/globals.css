@@ -28,22 +28,129 @@ input[type="file"] {
   display: none;
 }
 
+/* Human-feel motion: asymmetric easing so motion settles like a real hand,
+   never snapping or landing flat. */
+:root {
+  --ease-human: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-settle: cubic-bezier(0.34, 1.46, 0.64, 1);
+  --ease-drift: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
 @keyframes slide-in {
-  from { transform: translateX(100%); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
+  0% { transform: translateX(100%); opacity: 0; }
+  60% { opacity: 1; }
+  100% { transform: translateX(0); opacity: 1; }
 }
 
 .animate-slide-in {
-  animation: slide-in 0.3s ease-out;
+  animation: slide-in 0.45s var(--ease-settle);
 }
 
 @keyframes fade-in {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(6px) scale(0.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .animate-fade-in {
-  animation: fade-in 0.2s ease-out;
+  animation: fade-in 0.35s var(--ease-human);
+}
+
+/* Scroll reveal: rise + settle, staggered by inline --reveal-delay.
+   Starts hidden until IntersectionObserver adds .is-revealed. */
+@keyframes reveal-up {
+  0% { opacity: 0; transform: translateY(28px) scale(0.97); }
+  70% { opacity: 1; transform: translateY(-3px) scale(1.004); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes reveal-in {
+  from { opacity: 0; transform: scale(0.94); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+[data-reveal] {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+[data-reveal].is-revealed {
+  animation: reveal-up 0.75s var(--ease-human) both;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal="scale"].is-revealed {
+  animation-name: reveal-in;
+  animation-duration: 0.7s;
+  animation-timing-function: var(--ease-settle);
+}
+
+/* Decorative glow blob: the drift offset is baked into the keyframes because
+   an animation's `transform` would otherwise clobber Tailwind's translate
+   utilities on the same element. */
+@keyframes blob-drift-a {
+  0%, 100% { transform: translate(50%, -50%); }
+  50% { transform: translate(50%, calc(-50% - 10px)); }
+}
+
+@keyframes blob-drift-b {
+  0%, 100% { transform: translate(50%, -50%); }
+  50% { transform: translate(50%, calc(-50% + 7px)); }
+}
+
+.blob-a { animation: blob-drift-a 13s var(--ease-drift) infinite; }
+.blob-b { animation: blob-drift-b 10s var(--ease-drift) infinite; }
+
+/* Organic idle drift for imagery — slow, uneven, never in lockstep */
+@keyframes drift {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  33% { transform: translate3d(0, -7px, 0) rotate(-0.4deg); }
+  66% { transform: translate3d(0, 5px, 0) rotate(0.3deg); }
+}
+
+.drift-slow { animation: drift 11s var(--ease-drift) infinite; }
+.drift-mid { animation: drift 8.5s var(--ease-drift) infinite; }
+.drift-fast { animation: drift 6.5s var(--ease-drift) infinite; }
+
+/* Interactive lift: subtle over-travel, then settle */
+.lift {
+  transition: transform 0.5s var(--ease-settle), box-shadow 0.5s var(--ease-human),
+    background-color 0.4s var(--ease-human), border-color 0.4s var(--ease-human),
+    color 0.35s var(--ease-human);
+}
+
+.lift:hover {
+  transform: translateY(-6px);
+}
+
+.lift-soft:hover {
+  transform: translateY(-3px) scale(1.012);
+}
+
+.press {
+  transition: transform 0.28s var(--ease-settle);
+}
+
+.press:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    animation: none !important;
+  }
+  .drift-slow,
+  .drift-mid,
+  .drift-fast,
+  .blob-a,
+  .blob-b {
+    animation: none;
+  }
+  .lift:hover,
+  .lift-soft:hover,
+  .press:active {
+    transform: none;
+  }
 }
 
 @keyframes shimmer {
